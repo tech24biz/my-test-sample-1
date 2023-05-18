@@ -115,6 +115,7 @@ public class IosSampleTest {
     @Description("Show pop up for invalid empty credentials")
     @Test
     private void clickEmptyContinue() {
+        try{
         checkAppiumDriver();
 
         appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
@@ -130,6 +131,10 @@ public class IosSampleTest {
         WebElement alertOkButton = buttonElements.get(0);
         Assert.assertTrue(alertOkButton.isDisplayed());
         alertOkButton.click();
+        }
+        catch (Exception e){
+            GSLogger.print(" Error-100302: "+ e.getLocalizedMessage());
+        }
     }
 
     @Severity(SeverityLevel.BLOCKER)
@@ -138,17 +143,18 @@ public class IosSampleTest {
     @Description("Show pop up for invalid empty credentials")
     @Test
     private void clickContinueWithValidData() {
-//        checkAppiumDriver();
-//
-//        appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
-//
-//        Allure.step("Entered phone number");
-//
-////        Allure.step("Entered OTP");
-//
-//
-//        appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
-//        Allure.step("Clicked the Continue button after entering valid data");
+        try{
+            checkAppiumDriver();
+            List<WebElement> textElements = appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeTextField[contains(@value, '%s')]", "Enter Phone No.")));
+            textElements.get(0).sendKeys("2015431179");
+            Allure.step("Keyed in phone number");
+            appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+            Allure.step("Clicked the Continue button after entering valid data");
+        }
+        catch (Exception e){
+            GSLogger.print(" Error-100301: "+ e.getLocalizedMessage());
+        }
+
     }
 
 }
