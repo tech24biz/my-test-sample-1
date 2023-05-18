@@ -45,13 +45,7 @@ public class AppiumServer {
         }
     }
 
-    public void addDelay(int timeInMilli) {
-        try {
-            Thread.sleep(timeInMilli);
-        }catch (Exception e){
-            GSLogger.print(" Error-100001 Thread sleep Exception: "+ e.getLocalizedMessage());
-        }
-    }
+
 
     public void stopLocal() {
         try {

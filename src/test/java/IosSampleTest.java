@@ -12,7 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import java.net.URL;
 import java.util.List;
-import static org.example.AppiumServer.theAppiumServer;
+import org.example.Utils;
 
 
 public class IosSampleTest {
@@ -66,7 +66,7 @@ public class IosSampleTest {
             appiumDriver = new IOSDriver(appiumServerUrl, testOptions);
             GSLogger.print("\n\n -------------- 🌿 🌿 🌿 appiumDriver initialised with file path  🌿 🌿 🌿 -------------------- \n\n ");
 
-            theAppiumServer.addDelay(1000);
+            Utils.addDelay(1000);
         }catch (Exception e){
             GSLogger.print(" Error-100007 AppiumServer START Exception: "+ e.getLocalizedMessage());
             setupDriverWithBundleId();
@@ -93,10 +93,19 @@ public class IosSampleTest {
             URL appiumServerUrl = new URL("http://"+ AppiumServer.serverIp +":"+ AppiumServer.serverPort);
             appiumDriver = new IOSDriver(appiumServerUrl, testOptions);
             GSLogger.print("\n\n -------------- 🌿 🌿 🌿 appiumDriver initialised with bundle id  🌿 🌿 🌿 -------------------- \n\n ");
-
-            theAppiumServer.addDelay(1000);
         }catch (Exception e){
             GSLogger.print(" Error-100007 AppiumServer START Exception: "+ e.getLocalizedMessage());
+        }
+    }
+
+    public static void checkAppiumDriver() {
+        Utils.addDelay(2000);
+
+        if(appiumDriver == null){
+            GSLogger.print("\n\n --------  🔥 🔥 🔥  appiumDriver is NULL  🔥 🔥 🔥 --------- \n\n ");
+            setupDriverWithAppFile();
+        } else {
+            GSLogger.print("\n\n --------  ☃️ ☃️ ☃️ appiumDriver is NOT NULL  ☃️ ☃️ ☃️ --------- \n\n ");
         }
     }
 
@@ -105,32 +114,41 @@ public class IosSampleTest {
     @Story("Verify Login")
     @Description("Show pop up for invalid empty credentials")
     @Test
-    private void clickNext() {
-        theAppiumServer.addDelay(3000);
-        if(appiumDriver == null){
-            GSLogger.print("\n\n --------  🔥 🔥 🔥  appiumDriver is NULL  🔥 🔥 🔥 --------- \n\n ");
-//            setupDriverWithAppFile();
-//            theAppiumServer.addDelay(2000);
-        } else {
-            GSLogger.print("\n\n --------  🍁 🍁 🍁 appiumDriver is NOT NULL   🍁 🍁 🍁 --------- \n\n ");
-        }
+    private void clickEmptyContinue() {
+        checkAppiumDriver();
 
         appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
         Allure.step("Clicked the Continue button without entering data");
-////        theAppiumServer.addDelay(3000);
         String warningMessage = "Please enter a valid phone number";
-//
-        List<WebElement> elements1 = appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeStaticText[contains(@value, '%s')]", warningMessage)));
-        Assert.assertTrue(elements1.size() > 0);
-//        WebElement alertPopup = elements.get(0);
-//        Assert.assertTrue(alertPopup.isDisplayed());
 
-        List<WebElement> elements2 = appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeButton[contains(@name, '%s')]", "OK")));
-//
-        Assert.assertTrue(elements2.size() > 0);
-        WebElement alertOkButton = elements2.get(0);
+        List<WebElement> textElements = appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeStaticText[contains(@value, '%s')]", warningMessage)));
+        Assert.assertTrue(textElements.size() > 0);
+
+
+        List<WebElement> buttonElements = appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeButton[contains(@name, '%s')]", "OK")));
+        Assert.assertTrue(buttonElements.size() > 0);
+        WebElement alertOkButton = buttonElements.get(0);
         Assert.assertTrue(alertOkButton.isDisplayed());
         alertOkButton.click();
+    }
+
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("Login")
+    @Story("Verify Login")
+    @Description("Show pop up for invalid empty credentials")
+    @Test
+    private void clickContinueWithValidData() {
+//        checkAppiumDriver();
+//
+//        appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+//
+//        Allure.step("Entered phone number");
+//
+////        Allure.step("Entered OTP");
+//
+//
+//        appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+//        Allure.step("Clicked the Continue button after entering valid data");
     }
 
 }
