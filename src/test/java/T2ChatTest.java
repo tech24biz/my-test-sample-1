@@ -11,7 +11,7 @@ public class T2ChatTest {
     @Feature("Chat")
     @Story("Search for Chat")
     @Description("Search for Chat and open it")
-    @Test
+    @Test(dependsOnMethods ={"test3_SubmitSystemOTP"})
     private void test4_SearchChars() {
         try {
             AllTests.checkAppiumDriver();

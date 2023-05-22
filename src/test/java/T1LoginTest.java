@@ -15,7 +15,8 @@ public class T1LoginTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Show pop up for invalid empty credentials")
-    @Test
+
+    @Test//(groups = "a")
     private void test1_ClickEmptyContinue() {
         try{
             AllTests.checkAppiumDriver();
@@ -44,7 +45,7 @@ public class T1LoginTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Ask OTP after valid system phone number")
-    @Test
+    @Test(dependsOnMethods ={"test1_ClickEmptyContinue"})
     private void test2_ClickContinueWithValidData() {
         try{
             AllTests.checkAppiumDriver();
@@ -85,7 +86,7 @@ public class T1LoginTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Accept system OTP")
-    @Test
+    @Test(dependsOnMethods ={"test2_ClickContinueWithValidData"})
     private void test3_SubmitSystemOTP() {
         try {
             AllTests.checkAppiumDriver();
@@ -117,6 +118,7 @@ public class T1LoginTest {
             e.printStackTrace();
         }
     }
+
 
 
 }
