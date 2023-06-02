@@ -63,7 +63,7 @@ public class AllTests {
 
             Utils.addDelay(1000);
         }catch (Exception e){
-            GSLogger.print(" Error-100007 AppiumServer START Exception: "+ e.getLocalizedMessage());
+            GSLogger.print(" Error-100014 AppiumServer START Exception: "+ e.getLocalizedMessage());
             e.printStackTrace();
             setupDriverWithBundleId();
         }

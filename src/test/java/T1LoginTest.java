@@ -1,5 +1,6 @@
 import io.appium.java_client.AppiumBy;
 import io.qameta.allure.*;
+import org.example.AppiumServer;
 import org.example.GSLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,13 +12,19 @@ import org.example.Utils;
 
 public class T1LoginTest {
 
+    @BeforeClass
+    void testSuiteSetup() {
+        AppiumServer.initServer();
+        AllTests.setupDriverWithAppFile();
+    }
+
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Login")
     @Story("Verify Login")
     @Description("Show pop up for invalid empty credentials")
 
     @Test
-    private void test1_ClickEmptyContinue() {
+    void test1_ClickEmptyContinue() {
         try{
             AllTests.checkAppiumDriver();
             AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
