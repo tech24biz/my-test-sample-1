@@ -11,7 +11,7 @@
             <class name="T2ChatTest" >
                 <methods>
                     <include name="test3_SubmitSystemOTP"/>
-                    <include name="test4_SearchChars"/>
+                    <include name="test4_AssertElements"/>
                 </methods>
             </class>
 <!--            <class name="T3Registration" >-->

@@ -24,7 +24,7 @@ public class T2ChatTest {
 //    @Test(dependsOnMethods ={"T1LoginTest.test2_ClickContinueWithValidData"})
     @Test
     private void test3_SubmitSystemOTP() {
-        try {
+//        try {
             ModuleBase.checkAppiumDriver();
             Utils.addDelay(3000);
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
@@ -39,35 +39,29 @@ public class T2ChatTest {
             GSLogger.print(" otpInputField Text " + otpInputField.getText());
 
             Allure.step("Keyed in OTP");
-        } catch (Exception e) {
-            GSLogger.print(" Error100303: " + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            GSLogger.print(" Error100303: " + e.getLocalizedMessage());
+//            e.printStackTrace();
+//        }
 
-        try{
+//        try{
             ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering OTP");
             Utils.addDelay(15000);
-        }
-        catch (Exception e){
-            GSLogger.print(" Error100304: "+ e.getLocalizedMessage());
-            e.printStackTrace();
-        }
+//        }
+//        catch (Exception e){
+//            GSLogger.print(" Error100304: "+ e.getLocalizedMessage());
+//            e.printStackTrace();
+//        }
     }
 
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Chat")
     @Story("Search for Chat")
     @Description("Search for Chat and open it")
-   // @Test(dependsOnMethods ={"test3_SubmitSystemOTP"})
-
-//    private WebElement goofElementByXPath(String pathStr) {
-//        return AllTests.appiumDriver.findElement(AppiumBy.xpath(pathStr));
-//    }
-
     @Test
     private void test4_AssertElements() {
-        try {
+        //try {
 
             ModuleBase.checkAppiumDriver();
             Utils.addDelay(3000);
@@ -76,7 +70,7 @@ public class T2ChatTest {
             //Assert whether Chat heading is displayed in the home page
             Assert.assertTrue(chatHeading.isDisplayed());
 
-            WebElement goofGPT_chat = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"GG, Goof GPT\"]"));
+            WebElement goofGPT_chat = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Goof GPT"));
             //Assert whether at least Goof GPT is displayed in the chat screen
             Assert.assertTrue(goofGPT_chat.isDisplayed());
 
@@ -119,10 +113,10 @@ public class T2ChatTest {
             //Assert whether Profile icon is displayed
             Assert.assertTrue(profileIcon.isDisplayed());
 
-        } catch (Exception e) {
-            GSLogger.print(" Error-100305: " + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            GSLogger.print(" Error-100305: " + e.getLocalizedMessage());
+//            e.printStackTrace();
+//        }
 
     }
 }
