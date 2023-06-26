@@ -60,7 +60,7 @@ public class T2ChatTest {
     @Story("Search for Chat")
     @Description("Search for Chat and open it")
     @Test
-    private void test4_AssertElements() {
+    private void test4_AssertElementsInHomePage() {
         //try {
 
             ModuleBase.checkAppiumDriver();
@@ -105,25 +105,41 @@ public class T2ChatTest {
 
             //Add a new Chat
             WebElement addChatButton =  ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name= 'Add']"));
-            // Assert whether the user is tap the Add button to start a new Chat
+            // Assert whether the user can see 'Add button' to start a new Chat
             Assert.assertTrue(addChatButton.isDisplayed());
+            Allure.step("Add Chat button is visible");
+            Utils.addDelay(2000);
 
-            //Check whether all the navigation elements are available
+
+        //Check whether all the navigation elements are available
+
             WebElement chatIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Chat']"));
             //Assert whether Chat icon is displayed
             Assert.assertTrue(chatIcon.isDisplayed());
+            Allure.step("Chat Icon is displayed in the navigation bar");
+            Utils.addDelay(2000);
 
             WebElement gamesIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Games']"));
             //Assert whether Games icon is displayed
             Assert.assertTrue(gamesIcon.isDisplayed());
+            Allure.step("Games Icon is displayed in the navigation bar and is tapped");
+            gamesIcon.click();
+            Utils.addDelay(3000);
 
             WebElement newsIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='News']"));
             //Assert whether News icon is displayed
             Assert.assertTrue(newsIcon.isDisplayed());
+            Allure.step("News Icon is displayed in the navigation bar and is tapped");
+            newsIcon.click();
+            Utils.addDelay(3000);
 
             WebElement profileIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Profile']"));
             //Assert whether Profile icon is displayed
             Assert.assertTrue(profileIcon.isDisplayed());
+            Allure.step("Profile Icon is displayed in the navigation bar and is tapped");
+            profileIcon.click();
+            Utils.addDelay(3000);
+
 
 //        } catch (Exception e) {
 //            GSLogger.print(" Error-100305: " + e.getLocalizedMessage());
