@@ -14,11 +14,11 @@ import java.util.List;
 
 public class T3Registration {
 
-    @BeforeClass
-    public static void testSuiteSetup() {
-        AppiumServer.initServer();
-        AllTests.setupDriverWithAppFile();
-    }
+//    @BeforeClass
+//    public static void testSuiteSetup() {
+//        AppiumServer.initServer();
+//        AllTests.setupDriverWithAppFile();
+//    }
 
     private String userSequence = "0016";
 

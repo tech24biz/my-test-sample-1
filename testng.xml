@@ -1,5 +1,5 @@
 <suite name="LoginSuite" verbose="1">
-    <test name="AfterSuccessfulLogin" preserve-order="false"  enabled="true">
+    <test name="AfterSuccessfulLogin" preserve-order="true"  enabled="true">
         <classes>
             <class name="T1LoginTest" >
                 <methods>

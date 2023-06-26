@@ -12,11 +12,11 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class T2ChatTest {
-    @BeforeClass
-    void testSuiteSetup() {
-        AppiumServer.initServer();
-        AllTests.setupDriverWithAppFile();
-    }
+//    @BeforeClass
+//    void testSuiteSetup() {
+//        AppiumServer.initServer();
+//        AllTests.setupDriverWithAppFile();
+//    }
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Login")
     @Story("Verify Login")

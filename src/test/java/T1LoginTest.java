@@ -13,11 +13,11 @@ import org.example.Utils;
 
 public class T1LoginTest {
 
-    @BeforeClass
-    void testSuiteSetup() {
-        AppiumServer.initServer();
-        AllTests.setupDriverWithAppFile();
-    }
+//    @BeforeClass
+//    void testSuiteSetup() {
+//        AppiumServer.initServer();
+//        AllTests.setupDriverWithAppFile();
+//    }
 
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Login")
