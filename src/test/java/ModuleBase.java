@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 
 import java.net.URL;
 
-public class AllTests {
+public class ModuleBase {
 
     public static AppiumDriver appiumDriver;
 

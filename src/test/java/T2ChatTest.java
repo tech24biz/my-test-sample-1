@@ -15,7 +15,7 @@ public class T2ChatTest {
 //    @BeforeClass
 //    void testSuiteSetup() {
 //        AppiumServer.initServer();
-//        AllTests.setupDriverWithAppFile();
+//        ModuleBase.setupDriverWithAppFile();
 //    }
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Login")
@@ -25,9 +25,9 @@ public class T2ChatTest {
     @Test
     private void test3_SubmitSystemOTP() {
         try {
-            AllTests.checkAppiumDriver();
+            ModuleBase.checkAppiumDriver();
             Utils.addDelay(3000);
-            List<WebElement> textElements = AllTests.appiumDriver.findElements(By.xpath(String.format
+            List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "")));
             GSLogger.print("otpInputField index count " + textElements.size());
 
@@ -45,7 +45,7 @@ public class T2ChatTest {
         }
 
         try{
-            AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+            ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering OTP");
             Utils.addDelay(15000);
         }
@@ -69,20 +69,20 @@ public class T2ChatTest {
     private void test4_AssertElements() {
         try {
 
-            AllTests.checkAppiumDriver();
+            ModuleBase.checkAppiumDriver();
             Utils.addDelay(3000);
 
-            WebElement chatHeading = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name='Chats']"));
+            WebElement chatHeading = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name='Chats']"));
             //Assert whether Chat heading is displayed in the home page
             Assert.assertTrue(chatHeading.isDisplayed());
 
-            WebElement goofGPT_chat = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"GG, Goof GPT\"]"));
+            WebElement goofGPT_chat = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"GG, Goof GPT\"]"));
             //Assert whether at least Goof GPT is displayed in the chat screen
             Assert.assertTrue(goofGPT_chat.isDisplayed());
 
             /* Search Box TCs */
 
-            WebElement searchBox = AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Search"));
+            WebElement searchBox = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Search"));
 
             //Assert whether SearchBox is displayed for searching characters
             Assert.assertTrue(searchBox.isDisplayed());
@@ -98,24 +98,24 @@ public class T2ChatTest {
 
             //Add a new Chat
 
-            WebElement addChatButton =  AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name= 'Add']"));
+            WebElement addChatButton =  ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name= 'Add']"));
             // Assert whether the user is tap the Add button to start a new Chat
             Assert.assertTrue(addChatButton.isDisplayed());
 
             //Check whether all the navigation elements are available
-            WebElement chatIcon = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Chat']"));
+            WebElement chatIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Chat']"));
             //Assert whether Chat icon is displayed
             Assert.assertTrue(chatIcon.isDisplayed());
 
-            WebElement gamesIcon = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Games']"));
+            WebElement gamesIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Games']"));
             //Assert whether Games icon is displayed
             Assert.assertTrue(gamesIcon.isDisplayed());
 
-            WebElement newsIcon = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='News']"));
+            WebElement newsIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='News']"));
             //Assert whether News icon is displayed
             Assert.assertTrue(newsIcon.isDisplayed());
 
-            WebElement profileIcon = AllTests.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Profile']"));
+            WebElement profileIcon = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name='Profile']"));
             //Assert whether Profile icon is displayed
             Assert.assertTrue(profileIcon.isDisplayed());
 

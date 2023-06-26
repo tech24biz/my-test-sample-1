@@ -16,7 +16,7 @@ public class T1LoginTest {
 //    @BeforeClass
 //    void testSuiteSetup() {
 //        AppiumServer.initServer();
-//        AllTests.setupDriverWithAppFile();
+//        ModuleBase.setupDriverWithAppFile();
 //    }
 
     @Severity(SeverityLevel.BLOCKER)
@@ -26,16 +26,16 @@ public class T1LoginTest {
     @Test
     void test1_ClickEmptyContinue() {
         try{
-            AllTests.checkAppiumDriver();
-            AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+            ModuleBase.checkAppiumDriver();
+            ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button without entering data");
             String warningMessage = "Please enter a valid phone number";
 
-            List<WebElement> textElements = AllTests.appiumDriver.findElements(By.xpath(String
+            List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String
                     .format("//XCUIElementTypeStaticText[contains(@value, '%s')]", warningMessage)));
             Assert.assertTrue(textElements.size() > 0);
 
-            List<WebElement> buttonElements = AllTests.appiumDriver.findElements(By.xpath(String
+            List<WebElement> buttonElements = ModuleBase.appiumDriver.findElements(By.xpath(String
                     .format("//XCUIElementTypeButton[contains(@name, '%s')]", "OK")));
             Assert.assertTrue(buttonElements.size() > 0);
             WebElement alertOkButton = buttonElements.get(0);
@@ -56,9 +56,9 @@ public class T1LoginTest {
     @Test
     private void test2_ClickContinueWithValidData() {
         try{
-            AllTests.checkAppiumDriver();
+            ModuleBase.checkAppiumDriver();
             Utils.addDelay(1000);
-            List<WebElement> textElements = AllTests.appiumDriver.findElements(By.xpath(String.format
+            List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "Enter Phone No.")));
             GSLogger.print("phone number textElements index count "+ textElements.size());
 
@@ -81,7 +81,7 @@ public class T1LoginTest {
             e.printStackTrace();
         }
         try{
-            AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
+            ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering valid data");
             Utils.addDelay(3000);
         }

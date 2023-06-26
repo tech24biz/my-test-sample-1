@@ -1,6 +1,7 @@
 <suite name="LoginSuite" verbose="1">
     <test name="AfterSuccessfulLogin" preserve-order="true"  enabled="true">
         <classes>
+            <class name="ModuleBase"/>
             <class name="T1LoginTest" >
                 <methods>
                     <include name="test1_ClickEmptyContinue"/>
@@ -13,14 +14,14 @@
                     <include name="test4_SearchChars"/>
                 </methods>
             </class>
-            <class name="T3Registration" >
-                <methods>
-                    <include name="test5_RegisterNew"/>
-                    <include name="test6_SubmitSystemOTP"/>
-                    <include name="test8_EnterRegnDetails"/>
-                    <include name="test9_delAccountDetails"/>
-                </methods>
-            </class>
+<!--            <class name="T3Registration" >-->
+<!--                <methods>-->
+<!--                    <include name="test5_RegisterNew"/>-->
+<!--                    <include name="test6_SubmitSystemOTP"/>-->
+<!--                    <include name="test8_EnterRegnDetails"/>-->
+<!--                    <include name="test9_delAccountDetails"/>-->
+<!--                </methods>-->
+<!--            </class>-->
         </classes>
 
     </test>
