@@ -10,6 +10,7 @@ import java.util.List;
 import org.example.Utils;
 
 
+
 public class T1LoginTest {
 
     @BeforeClass
@@ -22,7 +23,6 @@ public class T1LoginTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Show pop up for invalid empty credentials")
-
     @Test
     void test1_ClickEmptyContinue() {
         try{
@@ -52,7 +52,8 @@ public class T1LoginTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Ask OTP after valid system phone number")
-    @Test(dependsOnMethods ={"test1_ClickEmptyContinue"})
+//    @Test(dependsOnMethods ={"test1_ClickEmptyContinue"})
+    @Test
     private void test2_ClickContinueWithValidData() {
         try{
             AllTests.checkAppiumDriver();

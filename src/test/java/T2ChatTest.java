@@ -21,7 +21,8 @@ public class T2ChatTest {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Accept system OTP")
-    @Test(dependsOnMethods ={"T1LoginTest.test2_ClickContinueWithValidData"})
+//    @Test(dependsOnMethods ={"T1LoginTest.test2_ClickContinueWithValidData"})
+    @Test
     private void test3_SubmitSystemOTP() {
         try {
             AllTests.checkAppiumDriver();
@@ -64,7 +65,7 @@ public class T2ChatTest {
 //        return AllTests.appiumDriver.findElement(AppiumBy.xpath(pathStr));
 //    }
 
-    @Test(dependsOnMethods ={"T1LoginTest.test2_ClickContinueWithValidData"})
+    @Test
     private void test4_AssertElements() {
         try {
 

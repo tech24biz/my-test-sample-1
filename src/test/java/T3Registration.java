@@ -70,7 +70,8 @@ public class T3Registration {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Accept system OTP")
-   @Test(dependsOnMethods ={"test5_RegisterNew"})
+//   @Test(dependsOnMethods ={"test5_RegisterNew"})
+    @Test
     private void test6_SubmitSystemOTP() {
         try {
             AllTests.checkAppiumDriver();
@@ -107,7 +108,8 @@ public class T3Registration {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Accept system OTP")
-    @Test(dependsOnMethods ={"test5_RegisterNew"})
+//    @Test(dependsOnMethods ={"test5_RegisterNew"})
+    @Test
     private void test8_EnterRegnDetails() {
         try {
             AllTests.checkAppiumDriver();
@@ -185,7 +187,8 @@ public class T3Registration {
     @Feature("Delete Account")
     @Story("Delete Account")
     @Description("Delete Account")
-    @Test(dependsOnMethods ={"test8_EnterRegnDetails"})
+//    @Test(dependsOnMethods ={"test8_EnterRegnDetails"})
+    @Test
     private void test9_delAccountDetails() {
         try {
             AllTests.checkAppiumDriver();

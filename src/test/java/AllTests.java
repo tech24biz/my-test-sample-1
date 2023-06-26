@@ -52,9 +52,9 @@ public class AllTests {
 
             testOptions.setDeviceName(deviceName)
                     .setPlatformVersion("16.4")
-                    .setApp(appPath);
+                    .setApp(appPath)
 //                    .setAutoDismissAlerts(true)
-//                    .setNoReset(true); // if already installed, do NOT reinstall the app
+                    .setNoReset(false); // if already installed, do NOT reinstall the app
 //                    .setBundleId("com.goofsports.ios1")
 
             URL appiumServerUrl = new URL("http://"+ AppiumServer.serverIp +":"+ AppiumServer.serverPort);
@@ -83,8 +83,8 @@ public class AllTests {
             testOptions.setDeviceName(deviceName)
                     .setPlatformVersion("16.4")
 //                    .setAutoDismissAlerts(true)
-                    .setBundleId("com.goofsports.ios1");
-//                    .setNoReset(false); // if already installed, do NOT reinstall the app
+                    .setBundleId("com.goofsports.ios1")
+                    .setNoReset(false); // if already installed, do NOT reinstall the app
 
             URL appiumServerUrl = new URL("http://"+ AppiumServer.serverIp +":"+ AppiumServer.serverPort);
             appiumDriver = new IOSDriver(appiumServerUrl, testOptions);
