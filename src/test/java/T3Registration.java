@@ -5,8 +5,10 @@ import org.example.GSLogger;
 import org.example.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class T3Registration {
         AllTests.setupDriverWithAppFile();
     }
 
-    private String userSequence = "0012";
+    private String userSequence = "0016";
 
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Registration")
@@ -34,6 +36,7 @@ public class T3Registration {
             GSLogger.print("phone number textElements index count "+ textElements.size());
 
             WebElement phoneNumberInputField = textElements.get(0);
+            Assert.assertTrue(phoneNumberInputField.isDisplayed());// Check if the phone number field is displayed
 
             // Due to extra inputs from swift code, characters must be entered in specific sequence
             phoneNumberInputField.sendKeys("1");
@@ -67,7 +70,7 @@ public class T3Registration {
     @Feature("Login")
     @Story("Verify Login")
     @Description("Accept system OTP")
-    @Test(dependsOnMethods ={"test5_RegisterNew"})
+   @Test(dependsOnMethods ={"test5_RegisterNew"})
     private void test6_SubmitSystemOTP() {
         try {
             AllTests.checkAppiumDriver();
@@ -78,7 +81,7 @@ public class T3Registration {
 
             WebElement otpInputField = textElements.get(0);
 
-            otpInputField.sendKeys("404040");
+            otpInputField.sendKeys("1");
 
             Utils.addDelay(500);
             GSLogger.print(" otpInputField Text " + otpInputField.getText());
@@ -146,8 +149,75 @@ public class T3Registration {
             Utils.addDelay(5000);
             Allure.step("Clicked Continue to complete registration");
 
+            WebElement profileBtn = AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
+            profileBtn.click();
+            Utils.addDelay(3000);
+            Allure.step("Navigate to Profile button");
+
+           //Delete Account process after successful registration
+
+           WebElement delLink = AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
+           delLink.click();
+           Allure.step("Clicked on Delete Account option");
+            Utils.addDelay(3000);
+
+///*
+//          List<WebElement> alert = AllTests.appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
+//          Assert.assertTrue(alert.isEmpty());
+//*/
+//
+//            AllTests.appiumDriver.findElement(By.name("Delete my account")).click();
+//            Allure.step("Clicked on Delete Account option");
+//            Utils.addDelay(5000);
+//
+//            WebElement accDeleted = AllTests.appiumDriver.findElement(By.name("Account Deleted."));
+//            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
+//            Allure.step("Account Deleted confirmation dialog box is displayed");
+//            Utils.addDelay(5000);
+
         } catch (Exception e) {
-            GSLogger.print(" Error-100310: " + e.getLocalizedMessage());
+            GSLogger.print(" Error-100311: " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("Delete Account")
+    @Story("Delete Account")
+    @Description("Delete Account")
+    @Test(dependsOnMethods ={"test8_EnterRegnDetails"})
+    private void test9_delAccountDetails() {
+        try {
+            AllTests.checkAppiumDriver();
+            Utils.addDelay(3000);
+
+            WebElement profileBtn = AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
+            profileBtn.click();
+            Utils.addDelay(3000);
+            Allure.step("Navigate to Profile button");
+
+            //Delete Account process after successful registration
+
+            WebElement delLink = AllTests.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
+            delLink.click();
+            Allure.step("Clicked on Delete Account option");
+            Utils.addDelay(3000);
+
+//          List<WebElement> alert = AllTests.appiumDriver.findElements(AppiumBy.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
+//          Assert.assertTrue(alert.isEmpty());
+
+
+//            AllTests.appiumDriver.findElement(AppiumBy.linkText("Delete my account")).click();
+//            Allure.step("Clicked on Delete Account option");
+//            Utils.addDelay(5000);
+
+            WebElement accDeleted = AllTests.appiumDriver.findElement(AppiumBy.name("Account Deleted."));
+            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
+            Allure.step("Account Deleted confirmation dialog box is displayed");
+            Utils.addDelay(5000);
+
+        } catch (Exception e) {
+            GSLogger.print(" Error-100312: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
     }

@@ -55,6 +55,7 @@ public class T1LoginTest {
             GSLogger.print("phone number textElements index count "+ textElements.size());
 
             WebElement phoneNumberInputField = textElements.get(0);
+            Assert.assertTrue(phoneNumberInputField.isDisplayed());
 
             // Due to extra inputs from swift code, characters must be entered in specific sequence
             phoneNumberInputField.sendKeys("1");
