@@ -30,7 +30,7 @@ public class ModuleBase {
     @AfterSuite
     public static void cleanUp(){
         try {
-            appiumDriver.quit();
+            //appiumDriver.quit();
         } catch (Exception e){
             GSLogger.print(" tearDown Exception: "+ e.getLocalizedMessage() );
             e.printStackTrace();

@@ -72,10 +72,12 @@ public class T2ChatTest {
 
             WebElement goofGPT_chat = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Goof GPT"));
             //Assert whether at least Goof GPT is displayed in the chat screen
-            Assert.assertTrue(goofGPT_chat.isDisplayed());
+            //Assert.assertTrue(goofGPT_chat.getText() == "Goof GPT");
+            Assert.assertEquals(goofGPT_chat.getText(),"Goof GPT");
+            GSLogger.print(" Displayed text goofGPT_chat" + goofGPT_chat.getText());
+
 
             /* Search Box TCs */
-
             WebElement searchBox = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Search"));
 
             //Assert whether SearchBox is displayed for searching characters
@@ -86,12 +88,22 @@ public class T2ChatTest {
             searchBox.sendKeys("test");
 
             // Assert whether the user is able to enter the characters in the search box
-            Assert.assertTrue(searchBox.getText() == "test");
+            // Assert.assertTrue(searchBox.getText() == "test");
+
+            Assert.assertEquals(searchBox.getText(),"test");
+
             Allure.step("Keyed in search characters");
             Utils.addDelay(5000);
 
-            //Add a new Chat
+            //Press Cancel to get rid of Search box chars
+            WebElement cancelBtn = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']"));
+            //Assert if Cancel Button is displayed
+            Assert.assertTrue(cancelBtn.isDisplayed());
+            //if displayed
+            cancelBtn.click();
+            Utils.addDelay(3000);
 
+            //Add a new Chat
             WebElement addChatButton =  ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name= 'Add']"));
             // Assert whether the user is tap the Add button to start a new Chat
             Assert.assertTrue(addChatButton.isDisplayed());
