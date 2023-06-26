@@ -1,16 +1,22 @@
 import io.appium.java_client.AppiumBy;
 import io.qameta.allure.*;
+import org.example.AppiumServer;
 import org.example.GSLogger;
 import org.example.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class T2ChatTest {
-
+    @BeforeClass
+    void testSuiteSetup() {
+        AppiumServer.initServer();
+        AllTests.setupDriverWithAppFile();
+    }
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Login")
     @Story("Verify Login")
@@ -59,7 +65,7 @@ public class T2ChatTest {
 //    }
 
     @Test(dependsOnMethods ={"T1LoginTest.test2_ClickContinueWithValidData"})
-    private void test4_SearchChars() {
+    private void test4_AssertElements() {
         try {
 
             AllTests.checkAppiumDriver();
