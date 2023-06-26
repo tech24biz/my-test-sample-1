@@ -52,7 +52,7 @@ public class T2ChatTest {
     @Feature("Chat")
     @Story("Search for Chat")
     @Description("Search for Chat and open it")
-    @Test(dependsOnMethods ={"test3_SubmitSystemOTP"})
+   // @Test(dependsOnMethods ={"test3_SubmitSystemOTP"})
 
 //    private WebElement goofElementByXPath(String pathStr) {
 //        return AllTests.appiumDriver.findElement(AppiumBy.xpath(pathStr));
