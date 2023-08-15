@@ -13,16 +13,17 @@ public class ModuleBase {
 
     public static AppiumDriver appiumDriver;
 
+    static int suiteCounter  = 0;
     @BeforeSuite
+    @BeforeClass
     public static void testSuiteSetup() {
+        GSLogger.print("\n\n -------------- init 🛠 GS-suiteCounter = " + ++suiteCounter +" -------------------- \n\n ");
+
         AppiumServer.initServer();
         setupDriverWithAppFile();
     }
 
-//    @BeforeTest
-//    public static void testWiseSetup(){
-//        setupDriverWithBundleId();
-//    }
+
 //
 //    @AfterTest
 //    public static void tearDownSetup(){ }
@@ -37,10 +38,16 @@ public class ModuleBase {
         }
     }
 
+    static int counter = 0;
     public static void setupDriverWithAppFile() {
-        BasicConfigurator.configure();
+        if(appiumDriver == null){
+            GSLogger.print("\n\n -------------- init 🛠 GS-appiumDriver counter = " + ++counter +" -------------------- \n\n ");
+        } else {
+            GSLogger.print("\n\n -------------- ✋🏼 ✋🏼 ✋🏼 No need to GS-appiumDriver  ✋🏼 ✋🏼 ✋🏼 -------------------- \n\n ");
+            return;
+        }
         try {
-            String appPath = "./goofApp/Goof1Beta.app";
+            String appPath = "./goofApp/GoofBeta.app";
 
             // To find active simulator's device name
             // xcrun simctl list | egrep '(Booted)'
@@ -59,13 +66,13 @@ public class ModuleBase {
 
             URL appiumServerUrl = new URL("http://"+ AppiumServer.serverIp +":"+ AppiumServer.serverPort);
             appiumDriver = new IOSDriver(appiumServerUrl, testOptions);
-            GSLogger.print("\n\n -------------- 🌿 🌿 🌿 appiumDriver initialised with file path  🌿 🌿 🌿 -------------------- \n\n ");
+            GSLogger.print("\n\n -------------- 🌿 🌿 🌿 GS-appiumDriver initialised with file path  🌿 🌿 🌿 -------------------- \n\n ");
 
             Utils.addDelay(1000);
         }catch (Exception e){
-            GSLogger.print(" Error-100014 AppiumServer START Exception: "+ e.getLocalizedMessage());
+            GSLogger.print(" Error-100014 AppiumServer driver Exception: "+ e.getLocalizedMessage());
             e.printStackTrace();
-            setupDriverWithBundleId();
+//            setupDriverWithBundleId();
         }
     }
 
@@ -96,12 +103,12 @@ public class ModuleBase {
     }
 
     public static void checkAppiumDriver() {
-        Utils.addDelay(2000);
+//        Utils.addDelay(2000);
         if(appiumDriver == null){
-            GSLogger.print("\n\n --------  🔥 🔥 🔥  appiumDriver is NULL  🔥 🔥 🔥 --------- \n\n ");
+//            GSLogger.print("\n\n --------  🔥 🔥 🔥  GS-appiumDriver is NULL  🔥 🔥 🔥 --------- \n\n ");
             setupDriverWithAppFile();
         } else {
-            GSLogger.print("\n\n --------  ☃️ ☃️ ☃️ appiumDriver is NOT NULL  ☃️ ☃️ ☃️ --------- \n\n ");
+            GSLogger.print("\n\n --------  ☃️ ☃️ ☃️ GS-appiumDriver is NOT NULL  ☃️ ☃️ ☃️ --------- \n\n ");
         }
     }
 }

@@ -26,18 +26,18 @@ public class T1LoginTest {
     @Test
     void test1_ClickEmptyContinue() {
         try{
-            ModuleBase.checkAppiumDriver();
+            ModuleBase.testSuiteSetup();
             ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button without entering data");
             String warningMessage = "Please enter a valid phone number";
 
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String
                     .format("//XCUIElementTypeStaticText[contains(@value, '%s')]", warningMessage)));
-            Assert.assertTrue(textElements.size() > 0);
+            Assert.assertFalse(textElements.isEmpty());
 
             List<WebElement> buttonElements = ModuleBase.appiumDriver.findElements(By.xpath(String
                     .format("//XCUIElementTypeButton[contains(@name, '%s')]", "OK")));
-            Assert.assertTrue(buttonElements.size() > 0);
+            Assert.assertFalse(buttonElements.isEmpty());
             WebElement alertOkButton = buttonElements.get(0);
             Assert.assertTrue(alertOkButton.isDisplayed());
             alertOkButton.click();
