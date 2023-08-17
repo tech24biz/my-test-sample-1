@@ -18,20 +18,18 @@ public class ModuleBase {
     @BeforeClass
     public static void testSuiteSetup() {
         GSLogger.print("\n\n -------------- init 🛠 GS-suiteCounter = " + ++suiteCounter +" -------------------- \n\n ");
-
+        Utils.getNewRegistrationPhoneNumber();
         AppiumServer.initServer();
         setupDriverWithAppFile();
     }
 
-
-//
-//    @AfterTest
-//    public static void tearDownSetup(){ }
-
     @AfterSuite
     public static void cleanUp(){
         try {
-            //appiumDriver.quit();
+            GSLogger.print(" Tests Completed. Stopping Server. Releasing driver and port" );
+            Utils.addDelay(1000);
+            ModuleBase.appiumDriver.quit();
+            AppiumServer.singleton.stopLocal();
         } catch (Exception e){
             GSLogger.print(" tearDown Exception: "+ e.getLocalizedMessage() );
             e.printStackTrace();
@@ -111,4 +109,6 @@ public class ModuleBase {
             GSLogger.print("\n\n --------  ☃️ ☃️ ☃️ GS-appiumDriver is NOT NULL  ☃️ ☃️ ☃️ --------- \n\n ");
         }
     }
+
+
 }

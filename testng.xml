@@ -2,26 +2,26 @@
     <test name="AfterSuccessfulLogin" preserve-order="true"  enabled="true">
         <classes>
             <class name="ModuleBase"/>
-            <class name="T1LoginTest" >
-                <methods>
-                    <include name="test1_ClickEmptyContinue"/>
-                    <include name="test2_ClickContinueWithValidData"/>
-                </methods>
-            </class>
-            <class name="T2ChatTest" >
-                <methods>
-                    <include name="test3_SubmitSystemOTP"/>
-                    <include name="test4_AssertElementsInHomePage"/>
-                </methods>
-            </class>
-<!--            <class name="T3Registration" >-->
+<!--            <class name="T1LoginTest" >-->
 <!--                <methods>-->
-<!--                    <include name="test5_RegisterNew"/>-->
-<!--                    <include name="test6_SubmitSystemOTP"/>-->
-<!--                    <include name="test8_EnterRegnDetails"/>-->
-<!--                    <include name="test9_delAccountDetails"/>-->
+<!--                    <include name="test1_ClickEmptyContinue"/>-->
+<!--                    <include name="test2_ClickContinueWithValidData"/>-->
 <!--                </methods>-->
 <!--            </class>-->
+<!--            <class name="T2ChatTest" >-->
+<!--                <methods>-->
+<!--                    <include name="test3_SubmitSystemOTP"/>-->
+<!--                    <include name="test4_AssertElementsInHomePage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+            <class name="T3Registration" >
+                <methods>
+                    <include name="test5_RegisterNew"/>
+                    <include name="test6_SubmitSystemOTP"/>
+                    <include name="test8_EnterRegnDetails"/>
+                    <include name="test9_delAccountDetails"/>
+                </methods>
+            </class>
         </classes>
 
     </test>

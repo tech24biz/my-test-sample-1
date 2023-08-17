@@ -10,15 +10,15 @@ public class AppiumServer {
     static AppiumDriverLocalService appiumLocalServer;
     public static String serverIp = "127.0.0.1";
     public static int serverPort = 4723;
-    public static AppiumServer theAppiumServer;
+    public static AppiumServer singleton;
 
     public static void initServer() {
-        if(theAppiumServer == null) {
-            theAppiumServer = new AppiumServer();
-            theAppiumServer.setup();
-            theAppiumServer.start();
+        if(singleton == null) {
+            singleton = new AppiumServer();
+            singleton.setup();
+            singleton.start();
         } else {
-            theAppiumServer.start();
+            singleton.start();
         }
     }
 
@@ -49,10 +49,8 @@ public class AppiumServer {
 
     public void stopLocal() {
         try {
-//            if(appiumLocalServer.isRunning()) { // old instance will return false and result in leak
             GSLogger.print(" Attempting to stop server ");
-                appiumLocalServer.stop();
-//            }
+            appiumLocalServer.stop();
             GSLogger.print(" Appium Server is running 🖥️ : "+ appiumLocalServer.isRunning() );
         } catch (Exception e){
             GSLogger.print(" Error-100002 AppiumServer STOP Exception: "+ e.getLocalizedMessage() );

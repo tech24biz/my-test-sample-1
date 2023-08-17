@@ -5,11 +5,14 @@ import org.example.GSLogger;
 import org.example.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class T3Registration {
 
@@ -19,7 +22,6 @@ public class T3Registration {
 //        ModuleBase.setupDriverWithAppFile();
 //    }
 
-    private String userSequence = "0016";
 
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Registration")
@@ -29,7 +31,7 @@ public class T3Registration {
     private void test5_RegisterNew() {
         try{
             ModuleBase.checkAppiumDriver();
-            Utils.addDelay(1000);
+//            Utils.addDelay(1000);
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "Enter Phone No.")));
             GSLogger.print("phone number textElements index count "+ textElements.size());
@@ -41,7 +43,7 @@ public class T3Registration {
             phoneNumberInputField.sendKeys("1");
             phoneNumberInputField.sendKeys("01");
             phoneNumberInputField.sendKeys("010");
-            phoneNumberInputField.sendKeys(userSequence);
+            phoneNumberInputField.sendKeys( Utils.newRegistrationNumberSuffix);
 
             Utils.addDelay(500);
             GSLogger.print(" phoneNumberInputField Text "+ phoneNumberInputField.getText());
@@ -56,7 +58,7 @@ public class T3Registration {
         try{
             ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering valid phone number");
-            Utils.addDelay(3000);
+//            Utils.addDelay(3000);
         }
         catch (Exception e){
             GSLogger.print(" Error-100309: "+ e.getLocalizedMessage());
@@ -74,14 +76,14 @@ public class T3Registration {
     private void test6_SubmitSystemOTP() {
         try {
             ModuleBase.checkAppiumDriver();
-            Utils.addDelay(3000);
+//            Utils.addDelay(500);
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "")));
             GSLogger.print("otpInputField index count " + textElements.size());
 
             WebElement otpInputField = textElements.get(0);
 
-            otpInputField.sendKeys("1");
+            otpInputField.sendKeys("000000");
 
             Utils.addDelay(500);
             GSLogger.print(" otpInputField Text " + otpInputField.getText());
@@ -95,7 +97,7 @@ public class T3Registration {
         try{
             ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering OTP");
-            Utils.addDelay(15000);
+            Utils.addDelay(500);
         }
         catch (Exception e){
             GSLogger.print(" Error-100311: "+ e.getLocalizedMessage());
@@ -112,24 +114,27 @@ public class T3Registration {
     private void test8_EnterRegnDetails() {
         try {
             ModuleBase.checkAppiumDriver();
-            Utils.addDelay(3000);
+//            Utils.addDelay(3000);
 
-            WebElement firstName = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationFirstName"));
-            //firstName.click();
-            firstName.sendKeys("firstName_"+ userSequence);
+            String regNameId = "RegistrationFirstName";
+            WebDriverWait wait = new WebDriverWait( ModuleBase.appiumDriver, Duration.ofSeconds(15), Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(regNameId)));
+            WebElement firstNameTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId(regNameId));
+
+            firstNameTextField.sendKeys("firstName_"+  Utils.newRegistrationNumberSuffix);
 
             Utils.addDelay(500);
             //GSLogger.print(" otpInputField Text " + otpInputField.getText());
             Allure.step("Keyed in First Name");
 
-            WebElement lastName = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationLastName"));
-            lastName.sendKeys("lastName_" + userSequence);
+            WebElement lastNameTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationLastName"));
+            lastNameTextField.sendKeys("lastName_" +  Utils.newRegistrationNumberSuffix);
 
             Utils.addDelay(500);
             Allure.step("Keyed in Last Name");
 
-            WebElement email = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationEmail"));
-            email.sendKeys("testUser"+ userSequence +"@goof.com");
+            WebElement emailTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationEmail"));
+            emailTextField.sendKeys("testUser"+  Utils.newRegistrationNumberSuffix +"@goof.com");
 
             Utils.addDelay(500);
             Allure.step("Keyed in E-mail ID");
@@ -147,20 +152,20 @@ public class T3Registration {
 
             WebElement Continue = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue"));
             Continue.click();
-            Utils.addDelay(5000);
+            Utils.addDelay(500);
             Allure.step("Clicked Continue to complete registration");
 
-            WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
-            profileBtn.click();
-            Utils.addDelay(3000);
-            Allure.step("Navigate to Profile button");
-
-           //Delete Account process after successful registration
-
-           WebElement delLink = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
-           delLink.click();
-           Allure.step("Clicked on Delete Account option");
-            Utils.addDelay(3000);
+//            WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
+//            profileBtn.click();
+//            Utils.addDelay(3000);
+//            Allure.step("Navigate to Profile button");
+//
+//           //Delete Account process after successful registration
+//
+//           WebElement delLink = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
+//           delLink.click();
+//           Allure.step("Clicked on Delete Account option");
+//            Utils.addDelay(3000);
 
 ///*
 //          List<WebElement> alert = AllTests.appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
@@ -174,11 +179,13 @@ public class T3Registration {
 //            WebElement accDeleted = AllTests.appiumDriver.findElement(By.name("Account Deleted."));
 //            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
 //            Allure.step("Account Deleted confirmation dialog box is displayed");
-//            Utils.addDelay(5000);
+
+            ModuleBase.cleanUp();
 
         } catch (Exception e) {
             GSLogger.print(" Error-100311: " + e.getLocalizedMessage());
             e.printStackTrace();
+            ModuleBase.cleanUp();
         }
     }
 
@@ -191,11 +198,11 @@ public class T3Registration {
     private void test9_delAccountDetails() {
         try {
             ModuleBase.checkAppiumDriver();
-            Utils.addDelay(3000);
+//            Utils.addDelay(3000);
 
             WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
             profileBtn.click();
-            Utils.addDelay(3000);
+//            Utils.addDelay(3000);
             Allure.step("Navigate to Profile button");
 
             //Delete Account process after successful registration
@@ -203,7 +210,7 @@ public class T3Registration {
             WebElement delLink = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
             delLink.click();
             Allure.step("Clicked on Delete Account option");
-            Utils.addDelay(3000);
+//            Utils.addDelay(3000);
 
 //          List<WebElement> alert = AllTests.appiumDriver.findElements(AppiumBy.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
 //          Assert.assertTrue(alert.isEmpty());
