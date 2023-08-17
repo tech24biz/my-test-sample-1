@@ -205,6 +205,34 @@ public class T3Registration {
         }
     }
 
+//    @Severity(SeverityLevel.BLOCKER)
+//    @Feature("Logout")
+//    @Story("Verify Logout")
+//    @Description("Logout and verify user is redirected to Login screen")
+//    @Test
+//
+//    private void logout(){
+//        try{
+//
+//            ModuleBase.checkAppiumDriver();
+//            Utils.addDelay(2000);
+//            WebElement logoutBtn = ModuleBase.appiumDriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"Logout\"]"));
+//            GSLogger.print("Located Logout button");
+//
+//            logoutBtn.click();
+//
+//
+//        }
+//        catch (){
+//
+//
+//        }
+//
+//}
+
+
+
+
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Delete Account")
     @Story("Delete Account")
