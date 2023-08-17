@@ -32,6 +32,7 @@ public class T3Registration {
         try{
             ModuleBase.checkAppiumDriver();
 //            Utils.addDelay(1000);
+
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "Enter Phone No.")));
             GSLogger.print("phone number textElements index count "+ textElements.size());
@@ -74,9 +75,11 @@ public class T3Registration {
 //   @Test(dependsOnMethods ={"test5_RegisterNew"})
     @Test
     private void test6_SubmitSystemOTP() {
+        String otpEnteredErr = "";
+
         try {
             ModuleBase.checkAppiumDriver();
-//            Utils.addDelay(500);
+            Utils.addDelay(500);
             List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
                     ("//XCUIElementTypeTextField[contains(@value, '%s')]", "")));
             GSLogger.print("otpInputField index count " + textElements.size());
@@ -90,18 +93,25 @@ public class T3Registration {
 
             Allure.step("Keyed in OTP");
         } catch (Exception e) {
-            GSLogger.print(" Error-100310: " + e.getLocalizedMessage());
+            otpEnteredErr = " Error-100310: " + e.getLocalizedMessage();
+            GSLogger.print(otpEnteredErr);
             e.printStackTrace();
+        } finally {
+            Assert.assertTrue(otpEnteredErr.isEmpty(), "Failed to enter OTP. "+ otpEnteredErr);
         }
 
+        String foundContinueBtnErr = "";
         try{
             ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
             Allure.step("Clicked the Continue button after entering OTP");
             Utils.addDelay(500);
         }
         catch (Exception e){
-            GSLogger.print(" Error-100311: "+ e.getLocalizedMessage());
+            foundContinueBtnErr = " Error-100313: "+ e.getLocalizedMessage();
+            GSLogger.print(foundContinueBtnErr);
             e.printStackTrace();
+        } finally {
+            Assert.assertTrue(foundContinueBtnErr.isEmpty(), "Failed to locate Continue button. "+ foundContinueBtnErr);
         }
     }
 
@@ -112,13 +122,16 @@ public class T3Registration {
 //    @Test(dependsOnMethods ={"test5_RegisterNew"})
     @Test
     private void test8_EnterRegnDetails() {
+
+        String regErr = "";
         try {
             ModuleBase.checkAppiumDriver();
 //            Utils.addDelay(3000);
 
             String regNameId = "RegistrationFirstName";
-            WebDriverWait wait = new WebDriverWait( ModuleBase.appiumDriver, Duration.ofSeconds(15), Duration.ofSeconds(5));
+            WebDriverWait wait = new WebDriverWait( ModuleBase.appiumDriver, Duration.ofSeconds(15));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(regNameId)));
+
             WebElement firstNameTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId(regNameId));
 
             firstNameTextField.sendKeys("firstName_"+  Utils.newRegistrationNumberSuffix);
@@ -139,11 +152,12 @@ public class T3Registration {
             Utils.addDelay(500);
             Allure.step("Keyed in E-mail ID");
 
-            WebElement stateDropdown = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Select State"));
+            WebElement stateDropdown = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationSelectState"));
             stateDropdown.click();
+            Utils.addDelay(5000);
 
-            Utils.addDelay(500);
-            Allure.step("Keyed in E-mail ID");
+            Utils.addDelay(5000);
+            Allure.step("Clicked state dropdown");
 
             WebElement selectedState = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Alabama"));
             selectedState.click();
@@ -154,7 +168,7 @@ public class T3Registration {
             Continue.click();
             Utils.addDelay(500);
             Allure.step("Clicked Continue to complete registration");
-
+            Utils.addDelay(5000);
 //            WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
 //            profileBtn.click();
 //            Utils.addDelay(3000);
@@ -179,13 +193,15 @@ public class T3Registration {
 //            WebElement accDeleted = AllTests.appiumDriver.findElement(By.name("Account Deleted."));
 //            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
 //            Allure.step("Account Deleted confirmation dialog box is displayed");
-
             ModuleBase.cleanUp();
 
         } catch (Exception e) {
-            GSLogger.print(" Error-100311: " + e.getLocalizedMessage());
+            regErr = " Error-100311: " + e.getLocalizedMessage();
+            GSLogger.print(regErr);
             e.printStackTrace();
             ModuleBase.cleanUp();
+        } finally {
+            Assert.assertTrue(regErr.isEmpty(), " \n\n -------- \n  🔥  🔥  🔥 Registration failed... \n " + regErr + "\n "+"  🔥 🔥 🔥 \n\n");
         }
     }
 

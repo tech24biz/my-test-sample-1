@@ -1,22 +1,22 @@
-userName: techbiz_5JQcmu
-accessKey: ZxDjwneHDqWzZ7SXdfNq
+userName: sv_ZHgE0a
+accessKey: 5kKTqFjaqqyp7neg9Ka9
 framework: testng
-app: /Users/nishant/Developer/my-test-sample-1/GoofBeta.ipa
+app: /Users/nishant/Developer/my-test-sample-1/goofApp/GoofProduction.ipa
 platforms:
   - platformName: ios
     deviceName: iPhone 14 Pro Max
     platformVersion: 16
-  - platformName: ios
-    deviceName: iPhone XS
-    platformVersion: 15
-  - platformName: ios
-    deviceName: iPhone 11
-    platformVersion: 14
+#  - platformName: ios
+#    deviceName: iPhone XS
+#    platformVersion: 15
+#  - platformName: ios
+#    deviceName: iPhone 11
+#    platformVersion: 14
 parallelsPerPlatform: 1
-browserstackLocal: false
-buildName: vaku-bstack-demo-1
+browserstackLocal: true
+buildName: bstack-regn
 buildIdentifier: ${BUILD_NUMBER}
-projectName: vaku-project-1
+projectName: bstack-GS
 testObservability: true
 debug: true
 networkLogs: true
