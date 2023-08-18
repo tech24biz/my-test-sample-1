@@ -42,8 +42,8 @@ public class Utils {
             GSLogger.print(" Error-100013 get New Registration API Exception: "+ e.getLocalizedMessage());
             e.printStackTrace();
         } finally {
-            if(newRegistrationNumberSuffix.equals(defaultRegistrationNumberSuffix)) {
-                GSLogger.print("\n\n  ------ Error-100021 Failed to get New Registration Num from API. Terminating test suite ------ \n\n");
+            if(newRegistrationNumberSuffix.equals(defaultRegistrationNumberSuffix) || newRegistrationNumberSuffix.length() != 4) {
+                GSLogger.print("\n\n  ------ Error-100021 Failed to get New Registration Num from API: "+ newRegistrationNumberSuffix+ " . Terminating test suite ------ \n\n");
                 System.exit(-1001);
             }
         }
