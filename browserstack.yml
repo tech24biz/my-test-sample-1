@@ -24,5 +24,4 @@ projectName: GS-LoginSuite
 testObservability: true
 debug: true
 networkLogs: true
-
 source: testng:appium-intellij:v1.1.2

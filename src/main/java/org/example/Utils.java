@@ -5,9 +5,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.json.*;
 
+import static org.mozilla.javascript.Context.exit;
+
 public class Utils {
 
-    public static String newRegistrationNumberSuffix = "9000";
+    public static String defaultRegistrationNumberSuffix = "9000";
+    public static String newRegistrationNumberSuffix = defaultRegistrationNumberSuffix;
+
 
     public static void addDelay(int timeInMilli) {
         try {
@@ -37,6 +41,11 @@ public class Utils {
         } catch (Exception e) {
             GSLogger.print(" Error-100013 get New Registration API Exception: "+ e.getLocalizedMessage());
             e.printStackTrace();
+        } finally {
+            if(newRegistrationNumberSuffix.equals(defaultRegistrationNumberSuffix)) {
+                GSLogger.print("\n\n  ------ Error-100021 Failed to get New Registration Num from API. Terminating test suite ------ \n\n");
+                System.exit(-1001);
+            }
         }
     }
 }
