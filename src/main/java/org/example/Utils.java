@@ -24,11 +24,11 @@ public class Utils {
     public static void getNewRegistrationPhoneNumber() {
         GSLogger.print(" calling newRegistrationPhoneNumber API ");
         try {
-//            String stagingUrlPath = "https://gs-staging-magic-2.azurewebsites.net/api/v1/automation/new-test-registration-number";
-            String urlPathLocal = "http://localhost:5001/api/v1/automation/new-test-registration-number";
+            String serverUrlPath = "https://gs-prod-magic-1.azurewebsites.net/api/v1/automation/new-test-registration-number";
+//            String localUrlPath = "http://localhost:5001/api/v1/automation/new-test-registration-number";
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlPathLocal))
+                    .uri(URI.create(serverUrlPath))
                     .build();
 
             HttpResponse<String> httpResponse = client.send(request,
