@@ -1,7 +1,7 @@
 userName: sv_ZHgE0a
 accessKey: 5kKTqFjaqqyp7neg9Ka9
 framework: testng
-app: /Users/nishant/Developer/my-test-sample-1/goofApp/GoofProduction.ipa
+app: bs://b27e163a52671ce3dbcf34d27b22eda0f31d6101
 platforms:
   - platformName: ios
     deviceName: iPhone 14 Pro Max
@@ -14,9 +14,11 @@ platforms:
 #    platformVersion: 14
 parallelsPerPlatform: 1
 browserstackLocal: true
-buildName: bstack-regn
+buildName: GS-Regn-Flow-build
 buildIdentifier: ${BUILD_NUMBER}
-projectName: GS-LoginSuite
+projectName: GS-Regn-Flow
+# Test Observability is an intelligent test reporting & debugging product. It collects data using the SDK. Read more about what data is collected at https://www.browserstack.com/docs/test-observability/references/terms-and-conditions
+# Visit observability.browserstack.com to see your test reports and insights. To disable test observability, specify `testObservability: false` in the key below.
 # Test Observability is an intelligent test reporting & debugging product. It collects data using the SDK. Read more about what data is collected at https://www.browserstack.com/docs/test-observability/references/terms-and-conditions
 # Visit observability.browserstack.com to see your test reports and insights. To disable test observability, specify `testObservability: false` in the key below.
 # Test Observability is an intelligent test reporting & debugging product. It collects data using the SDK. Read more about what data is collected at https://www.browserstack.com/docs/test-observability/references/terms-and-conditions
