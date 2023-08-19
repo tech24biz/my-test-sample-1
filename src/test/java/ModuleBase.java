@@ -45,7 +45,7 @@ public class ModuleBase {
             return;
         }
         try {
-            String appPath = "./goofApp/GoofProduction.app";
+            String appPath = "./goofApp/GoofBeta.app";
 
             // To find active simulator's device name
             // xcrun simctl list | egrep '(Booted)'

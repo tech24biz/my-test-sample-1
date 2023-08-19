@@ -1,0 +1,23 @@
+<suite name="LoginSuite" verbose="1">
+    <test name="AfterSuccessfulLogin" preserve-order="true"  enabled="true">
+        <classes>
+            <class name="ModuleBase"/>
+            <class name="T1LoginTest" >
+                <methods>
+                    <include name="test2_ClickContinueWithValidData"/>
+                </methods>
+            </class>
+            <class name="T2ChatTest">
+                <methods>
+                    <include name="test3_SubmitSystemOTP"/>
+                </methods>
+            </class>
+            <class name="test4_PinGames2Chat" >
+                <methods>
+                    <include name="AddaNewChat"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+
