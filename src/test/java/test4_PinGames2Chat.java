@@ -2,15 +2,9 @@ import io.appium.java_client.AppiumBy;
 import io.qameta.allure.*;
 import org.example.GSLogger;
 import org.example.Utils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
-import java.util.List;
 
 public class test4_PinGames2Chat {
 
@@ -34,237 +28,106 @@ public class test4_PinGames2Chat {
 
             WebElement addChatBtn = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Add\"]"));
 
-//            if(goofGPTHeading.isDisplayed()){
+//            if(goofGPTHeading.isDisplayed())
             chatMenu.click();
             GSLogger.print("Chat Menu clicked");
             Utils.addDelay(1500);
-
-
             addChatBtn.click();
             GSLogger.print("Chat add button clicked");
+
         }
         catch (Exception e){
             GSLogger.print(" Error-100320: "+ e.getLocalizedMessage());
             e.printStackTrace();
         }
-
-//        try{
-//            ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
-//            Allure.step("Clicked the Continue button after entering valid phone number");
-////            Utils.addDelay(3000);
-//        }
-//        catch (Exception e){
-//            GSLogger.print(" Error-100309: "+ e.getLocalizedMessage());
-//            e.printStackTrace();
-//        }
-
     }
 
+
+
     @Severity(SeverityLevel.BLOCKER)
-    @Feature("Login")
-    @Story("Verify Login")
-    @Description("Accept system OTP")
+    @Feature("Add a new Chat")
+    @Story("Add a new Chat")
+    @Description("Handle Contact permission, and a add new chat")
 //   @Test(dependsOnMethods ={"test5_RegisterNew"})
     @Test
-    private void test6_SubmitSystemOTP() {
-        String otpEnteredErr = "";
-
+    private void contactPermission() {
+     //   String otpEnteredErr = "";
+        WebElement contactPermissionHeading = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"“Goof Sports” Would Like to Access Your Contacts\"]"));
         try {
             ModuleBase.checkAppiumDriver();
             Utils.addDelay(500);
-            List<WebElement> textElements = ModuleBase.appiumDriver.findElements(By.xpath(String.format
-                    ("//XCUIElementTypeTextField[contains(@value, '%s')]", "")));
-            GSLogger.print("otpInputField index count " + textElements.size());
+            //Utils.addDelay(2000);
 
-            WebElement otpInputField = textElements.get(0);
+            if (contactPermissionHeading.isDisplayed()) {
+                GSLogger.print("Contact Permission Dialog Box appears");
+                WebElement alertOK = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"OK\"]"));
+                alertOK.click();
+                GSLogger.print("Contact Permission accepted");
+                Allure.step("Contact Permission accepted");
+            }
+            else {
+                GSLogger.print("Contact Permission pop-up not displayed");
+                return;
+            }
 
-            otpInputField.sendKeys("000000");
+            Utils.addDelay(3000);
+            WebElement contactToTap = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("T1, Test 1User, +16505551231"));
+            contactToTap.click();
+            Allure.step("Clicked on the contact for P2P chat");
+            GSLogger.print("Clicked on the contact for P2P chat");
 
-            Utils.addDelay(500);
-            GSLogger.print(" otpInputField Text " + otpInputField.getText());
-
-            Allure.step("Keyed in OTP");
-        } catch (Exception e) {
-            otpEnteredErr = " Error-100310: " + e.getLocalizedMessage();
-            GSLogger.print(otpEnteredErr);
-            e.printStackTrace();
-        } finally {
-            Assert.assertTrue(otpEnteredErr.isEmpty(), "Failed to enter OTP. "+ otpEnteredErr);
-        }
-
-        String foundContinueBtnErr = "";
-        try{
-            ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue")).click();
-            Allure.step("Clicked the Continue button after entering OTP");
-            Utils.addDelay(500);
-        }
-        catch (Exception e){
-            foundContinueBtnErr = " Error-100313: "+ e.getLocalizedMessage();
-            GSLogger.print(foundContinueBtnErr);
-            e.printStackTrace();
-        } finally {
-            Assert.assertTrue(foundContinueBtnErr.isEmpty(), "Failed to locate Continue button. "+ foundContinueBtnErr);
-        }
-    }
-
-    @Severity(SeverityLevel.BLOCKER)
-    @Feature("Login")
-    @Story("Verify Login")
-    @Description("Accept system OTP")
-//    @Test(dependsOnMethods ={"test5_RegisterNew"})
-    @Test
-    private void test8_EnterRegnDetails() {
-
-        String regErr = "";
-        try {
-            ModuleBase.checkAppiumDriver();
-//            Utils.addDelay(3000);
-
-            String regNameId = "RegistrationFirstName";
-            WebDriverWait wait = new WebDriverWait( ModuleBase.appiumDriver, Duration.ofSeconds(15));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(regNameId)));
-
-            WebElement firstNameTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId(regNameId));
-
-            firstNameTextField.sendKeys("firstName_"+  Utils.newRegistrationNumberSuffix);
-
-            Utils.addDelay(500);
-            //GSLogger.print(" otpInputField Text " + otpInputField.getText());
-            Allure.step("Keyed in First Name");
-
-            WebElement lastNameTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationLastName"));
-            lastNameTextField.sendKeys("lastName_" +  Utils.newRegistrationNumberSuffix);
-
-            Utils.addDelay(500);
-            Allure.step("Keyed in Last Name");
-
-            WebElement emailTextField = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationEmail"));
-            emailTextField.sendKeys("testUser"+  Utils.newRegistrationNumberSuffix +"@goof.com");
-
-            Utils.addDelay(500);
-            Allure.step("Keyed in E-mail ID");
-
-            WebElement stateDropdown = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("RegistrationSelectState"));
-            stateDropdown.click();
+            Utils.addDelay(3000);
+            WebElement chatNavBar = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("(//XCUIElementTypeButton[@name=\"Chat\"])[2]"));
+            chatNavBar.click();
+            Allure.step("Clicked on the Chat button in Navigation bar");
+            GSLogger.print("Clicked on the Chat button in Navigation bar");
             Utils.addDelay(5000);
 
-            Utils.addDelay(5000);
-            Allure.step("Clicked state dropdown");
+            WebElement notificationPermissionHeading = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"“Goof Sports” Would Like to Send You Notifications\"]"));
+            if (notificationPermissionHeading.isDisplayed()) {
+                GSLogger.print("Notification Permission Dialog Box appears");
+                WebElement alertAllow = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[@name=\"Allow\"]"));
+                alertAllow.click();
+                Utils.addDelay(3000);
+                GSLogger.print("Notification Permission accepted");
+                Allure.step("Notification Permission accepted");
+            }
 
-            WebElement selectedState = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Alabama"));
-            selectedState.click();
-            Utils.addDelay(500);
-            Allure.step("Selected state dropdown");
+            else {
+                GSLogger.print("Contact Permission pop-up not displayed");
+                return;
+            }
 
-            WebElement Continue = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Continue"));
-            Continue.click();
-            Utils.addDelay(500);
-            Allure.step("Clicked Continue to complete registration");
-            Utils.addDelay(5000);
-//            WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
-//            profileBtn.click();
-//            Utils.addDelay(3000);
-//            Allure.step("Navigate to Profile button");
-//
-//           //Delete Account process after successful registration
-//
-//           WebElement delLink = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
-//           delLink.click();
-//           Allure.step("Clicked on Delete Account option");
-//            Utils.addDelay(3000);
+            WebElement chatTextField = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeApplication[@name=\"Goof Sports\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextView"));
+            Utils.addDelay(3000);
+            String msgText = "Hi there!!!";
+            chatTextField.sendKeys(msgText);
 
-///*
-//          List<WebElement> alert = AllTests.appiumDriver.findElements(By.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
-//          Assert.assertTrue(alert.isEmpty());
-//*/
-//
-//            AllTests.appiumDriver.findElement(By.name("Delete my account")).click();
-//            Allure.step("Clicked on Delete Account option");
-//            Utils.addDelay(5000);
-//
-//            WebElement accDeleted = AllTests.appiumDriver.findElement(By.name("Account Deleted."));
-//            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
-//            Allure.step("Account Deleted confirmation dialog box is displayed");
-            ModuleBase.cleanUp();
+            Utils.addDelay(2000);
+            WebElement sendText = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Arrow Up Circle"));
+            Utils.addDelay(2000);
+            if(sendText.isDisplayed()) {
+                sendText.click();
+                GSLogger.print("Clicked send text button");
+                Utils.addDelay(3000);
+            }
+            else{
+                System.out.println("Why is it not getting displayed???");
+                return;
+            }
 
-        } catch (Exception e) {
-            regErr = " Error-100311: " + e.getLocalizedMessage();
-            GSLogger.print(regErr);
-            e.printStackTrace();
-            ModuleBase.cleanUp();
-        } finally {
-            Assert.assertTrue(regErr.isEmpty(), " \n\n -------- \n  🔥  🔥  🔥 Registration failed... \n " + regErr + "\n "+"  🔥 🔥 🔥 \n\n");
+            WebElement chatTextDisplayed = ModuleBase.appiumDriver.findElement(AppiumBy.xpath("//XCUIElementTypeApplication[@name=\"Goof Sports\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]"));
+            Assert.assertTrue(chatTextDisplayed.isDisplayed(), "The keyed in chat message is displayed");
         }
-    }
 
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Feature("Logout")
-//    @Story("Verify Logout")
-//    @Description("Logout and verify user is redirected to Login screen")
-//    @Test
-//
-//    private void logout(){
-//        try{
-//
-//            ModuleBase.checkAppiumDriver();
-//            Utils.addDelay(2000);
-//            WebElement logoutBtn = ModuleBase.appiumDriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name=\"Logout\"]"));
-//            GSLogger.print("Located Logout button");
-//
-//            logoutBtn.click();
-//
-//
+        catch (Exception e) {
+            GSLogger.print(" Error-100321: " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+//        finally {
+//            Assert.assertTrue(contactPermissionHeading.isEnabled(), "Contact Permission Popup is not displayed");
 //        }
-//        catch (){
-//
-//
-//        }
-//
-//}
 
-
-
-
-    @Severity(SeverityLevel.BLOCKER)
-    @Feature("Delete Account")
-    @Story("Delete Account")
-    @Description("Delete Account")
-//    @Test(dependsOnMethods ={"test8_EnterRegnDetails"})
-    @Test
-    private void test9_delAccountDetails() {
-        try {
-            ModuleBase.checkAppiumDriver();
-//            Utils.addDelay(3000);
-
-            WebElement profileBtn = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Profile"));
-            profileBtn.click();
-//            Utils.addDelay(3000);
-            Allure.step("Navigate to Profile button");
-
-            //Delete Account process after successful registration
-
-            WebElement delLink = ModuleBase.appiumDriver.findElement(AppiumBy.accessibilityId("Delete my account"));
-            delLink.click();
-            Allure.step("Clicked on Delete Account option");
-//            Utils.addDelay(3000);
-
-//          List<WebElement> alert = AllTests.appiumDriver.findElements(AppiumBy.xpath(String.format("//XCUIElementTypeTypeButton[contains(@name, '%s')]", "Delete")));
-//          Assert.assertTrue(alert.isEmpty());
-
-
-//            AllTests.appiumDriver.findElement(AppiumBy.linkText("Delete my account")).click();
-//            Allure.step("Clicked on Delete Account option");
-//            Utils.addDelay(5000);
-
-            WebElement accDeleted = ModuleBase.appiumDriver.findElement(AppiumBy.name("Account Deleted."));
-            Assert.assertTrue(accDeleted.isDisplayed()); //Asserts that the dialog box is displayed, confirming account deletion
-            Allure.step("Account Deleted confirmation dialog box is displayed");
-            Utils.addDelay(5000);
-
-        } catch (Exception e) {
-            GSLogger.print(" Error-100312: " + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
     }
-
 }

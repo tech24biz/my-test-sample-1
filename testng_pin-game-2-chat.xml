@@ -15,6 +15,7 @@
             <class name="test4_PinGames2Chat" >
                 <methods>
                     <include name="AddaNewChat"/>
+                    <include name="contactPermission"/>
                 </methods>
             </class>
         </classes>
